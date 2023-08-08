@@ -1,0 +1,35 @@
+new vagrant image 
+OS = ubuntu
+VM = oracle virtual machine
+
+1. install ubuntu-server
+2. user vagrant
+3. password vagrant
+4. install ssh server  
+5. change root user password to "vagrant" - sudo passwd root
+6. login as root
+7. apt-update
+8. apt-upgrade
+9. port forword
+10.shutdown -r now
+11.git-bash: loging as root to server, ssh root@127.0.0.1 -P 2222
+
+
+sudo apt-get install linux-headers-$(uname -r) build-essential dkms
+wget http://download.virtualbox.org/virtualbox/7.0.10/VBoxGuestAdditions_7.0.10.iso
+sudo mkdir /media/VBoxGuestAdditions
+sudo mount -o loop,ro VBoxGuestAdditions_7.0.10.iso /media/VBoxGuestAdditions
+sudo sh /media/VBoxGuestAdditions/VBoxLinuxAdditions.run
+rm VBoxGuestAdditions_7.0.10.iso
+sudo umount /media/VBoxGuestAdditions
+sudo rmdir /media/VBoxGuestAdditions
+
+vagrant package --base ubuntu-server --output ubuntu-server-22.04.2.box
+vagrant box add package.box --name ubuntu22
+
+wget -no-check-certificate https://github.com/hashicorp/vagrant/blob/main/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOK
+Lv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3
+NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
+
+
